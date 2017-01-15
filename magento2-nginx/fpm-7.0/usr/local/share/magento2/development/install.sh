@@ -24,11 +24,6 @@ function do_magento_install() {
   bash "$DIR/../install_magento.sh";
 }
 
-set +e
-is_hem_project
-set -e
-IS_HEM=$?
-
 function do_magento_assets_download() {
   if [ "$IS_HEM" -eq 0 ]; then
     # Run HEM
@@ -57,3 +52,13 @@ function do_magento_install_development_custom() {
     source "$DIR/install_custom.sh"
   fi
 }
+
+function do_magento_development_install() {
+  do_magento_install
+  do_magento_assets_download
+  do_magento_database_install
+  do_replace_core_config_values
+  do_magento_assets_install
+  do_magento_install_development_custom
+}
+do_magento_development_install

@@ -12,11 +12,6 @@ fi
 
 cd /app || exit 1
 
-set +e
-is_nfs
-IS_NFS=$?
-set -e
-
 function do_magento_switch_web_writable_directories_to_code_owner() {
   if [ "$IS_NFS" -ne 0 ]; then
     chown -R "${CODE_OWNER}":"${CODE_GROUP}" pub/media pub/static var
@@ -64,11 +59,6 @@ function do_magento_reindex() {
 }
 
 # Download the static assets
-set +e
-is_hem_project
-set -e
-IS_HEM=$?
-
 function do_magento_assets_download() {
   if [ "$IS_HEM" -eq 0 ]; then
     export HEM_RUN_ENV="${HEM_RUN_ENV:-local}"

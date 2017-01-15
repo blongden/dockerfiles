@@ -14,11 +14,6 @@ fi
 
 cd /app || exit 1;
 
-set +e
-is_nfs
-IS_NFS=$?
-set -e
-
 function do_magento_config() {
   # TODO: Convert to template
   if [ ! -f "app/etc/env.php" ]; then
