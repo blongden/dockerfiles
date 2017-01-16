@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /usr/local/share/magento2/magento_functions.sh
+
 alias_function do_build do_magento2_build_inner
 do_build() {
   do_magento2_build_inner
@@ -12,17 +14,25 @@ do_development_start() {
   do_magento2_development_start
 }
 
+alias_function do_templating do_magento2_templating_inner
+do_templating() {
+  mkdir -p /home/build/.hem/gems/
+  chown -R build:build /home/build/.hem/
+  do_magento2_templating_inner
+}
+
+alias_function do_composer do_magento2_composer_inner
 do_composer() {
-  # disable original composer in image hierarchy till install_magento ported
-  :
+  do_magento2_composer
+  do_magento2_composer_inner
 }
 
 do_magento2_install() {
-  bash /usr/local/share/magento2/install_magento.sh
-  bash /usr/local/share/magento2/install_magento_finalise.sh
+  do_magento2_build
 }
 
 do_magento2_development_start()
 {
-  bash /usr/local/share/magento2/development/install.sh
+  do_magento2_install
+  do_magento2_development_build
 }
