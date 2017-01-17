@@ -91,6 +91,9 @@ tasks:
         ez:
           image: quay.io/continuouspipe/ez6-apache-php7
           tag: v1.0
+        magento1_nginx:
+          image: quay.io/continuouspipe/magento1-nginx-php5.6
+          tag: v2.0
         magento2_nginx:
           image: quay.io/continuouspipe/magento2-nginx-php7
           tag: v1.0
